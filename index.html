@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cantina da Honestidade</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <section id="authScreen" class="screen active">
+        <div class="auth-layout">
+          <div class="auth-card">
+            <div class="brand-block">
+              <img src="assets/logo.png" alt="Logo Cantina da Honestidade" class="brand-logo" />
+              <div>
+                <h1>Cantina da Honestidade</h1>
+                <p>“Sua cantina. Sua escolha. Nossa confiança.”</p>
+              </div>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+              <label>
+                Matrícula ou e-mail
+                <input type="text" id="loginIdentifier" placeholder="Ex.: 20241001 ou aluno@escola.com" required />
+              </label>
+
+              <label>
+                Senha
+                <input type="password" id="loginPassword" placeholder="Sua senha" required />
+              </label>
+
+              <button type="submit" class="primary-button wide-button">Entrar</button>
+            </form>
+
+            <div class="auth-links">
+              <button type="button" class="text-button" id="goToRegister">Ainda não possui uma conta? Criar conta</button>
+              <button type="button" class="text-button muted" id="forgotPassword">Esqueci minha senha</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="registerScreen" class="screen">
+        <div class="auth-layout">
+          <div class="auth-card">
+            <div class="brand-block compact">
+              <img src="assets/logo.png" alt="Logo Cantina da Honestidade" class="brand-logo" />
+              <div>
+                <h2>Crie sua conta</h2>
+              </div>
+            </div>
+
+            <form id="registerForm" class="auth-form">
+              <div class="form-grid">
+                <label>
+                  Nome completo
+                  <input type="text" id="registerName" placeholder="Seu nome" required />
+                </label>
+
+                <label>
+                  Matrícula
+                  <input type="text" id="registerMatricula" placeholder="Ex.: 20241001" required />
+                </label>
+
+                <label>
+                  E-mail
+                  <input type="email" id="registerEmail" placeholder="seu@email.com" required />
+                </label>
+
+                <label>
+                  CPF
+                  <input type="text" id="registerCpf" placeholder="000.000.000-00" required />
+                </label>
+
+                <label>
+                  Senha
+                  <input type="password" id="registerPassword" placeholder="Crie uma senha" required />
+                </label>
+
+                <label>
+                  Confirmar senha
+                  <input type="password" id="registerConfirmPassword" placeholder="Repita a senha" required />
+                </label>
+              </div>
+
+              <button type="submit" class="primary-button wide-button">Criar minha conta</button>
+            </form>
+
+            <button type="button" class="text-button" id="backToLogin">Voltar para login</button>
+          </div>
+        </div>
+      </section>
+
+      <div id="mainApp" class="screen">
+        <header class="topbar">
+          <div class="brand-inline">
+            <img src="assets/logo.png" alt="Logo" class="mini-logo" />
+            <div>
+              <span class="brand-label">Cantina da Honestidade</span>
+            </div>
+          </div>
+
+          <div class="topbar-actions">
+            <button type="button" class="cart-indicator" data-page="cartPage">
+              <span>🛒</span>
+              <span>Carrinho</span>
+              <strong id="cartItemCount">0</strong>
+            </button>
+            <div class="user-pill" id="currentUserBadge">Aluno</div>
+            <button type="button" class="secondary-button" id="logoutButton">Sair</button>
+          </div>
+        </header>
+
+        <nav class="desktop-nav" aria-label="Navegação principal">
+          <button type="button" class="nav-button active" data-page="homePage">🏠 Início</button>
+          <button type="button" class="nav-button" data-page="productsPage">🛒 Produtos</button>
+          <button type="button" class="nav-button" data-page="cartPage">🛒 Carrinho</button>
+          <button type="button" class="nav-button" data-page="walletPage">💰 Carteira</button>
+          <button type="button" class="nav-button" data-page="historyPage">📜 Histórico</button>
+          <button type="button" class="nav-button" data-page="gastosPage">📊 Gastos</button>
+          <button type="button" class="nav-button" data-page="profilePage">👤 Perfil</button>
+        </nav>
+
+        <main class="content-area">
+          <section id="homePage" class="page active">
+            <div class="page-header">
+              <div>
+                <span class="eyebrow">PÁGINA INICIAL</span>
+                <h2 id="welcomeTitle">Olá, aluno! 👋</h2>
+              </div>
+              <div class="status-pill">🟢 Cantina aberta</div>
+            </div>
+
+            <div class="hero-card">
+              <div>
+                <p class="small-label">Saldo disponível</p>
+                <h3 id="homeSaldo">R$ 0,00</h3>
+              </div>
+              <button type="button" class="primary-button" data-page="addCreditPage">+ Adicionar crédito</button>
+            </div>
+
+            <div class="summary-grid" id="summaryGrid"></div>
+
+            <div class="shortcut-grid">
+              <button type="button" class="shortcut-card" data-page="productsPage">🛒<span>Comprar</span></button>
+              <button type="button" class="shortcut-card" data-page="addCreditPage">💰<span>Adicionar crédito</span></button>
+              <button type="button" class="shortcut-card" data-page="historyPage">📜<span>Histórico</span></button>
+              <button type="button" class="shortcut-card" data-page="gastosPage">📊<span>Meus gastos</span></button>
+              <button type="button" class="shortcut-card" data-page="profilePage">👤<span>Meu perfil</span></button>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <h3>Últimas compras</h3>
+                <button type="button" class="text-button" data-page="historyPage">Ver tudo</button>
+              </div>
+              <div id="recentPurchasesList" class="list-compact"></div>
+            </div>
+          </section>
+
+          <section id="walletPage" class="page">
+            <div class="page-header">
+              <div>
+                <span class="eyebrow">CARTEIRA</span>
+                <h2>Minha carteira</h2>
+              </div>
+              <button type="button" class="primary-button" data-page="addCreditPage">+ Adicionar crédito</button>
+            </div>
+
+            <div class="wallet-banner">
+              <span>Saldo disponível</span>
+              <strong id="walletSaldo">R$ 0,00</strong>
+            </div>
+
+            <div class="two-column">
+              <div class="panel stat-panel">
+                <p>Total de créditos adicionados</p>
+                <strong id="walletCredits">R$ 0,00</strong>
+              </div>
+              <div class="panel stat-panel">
+                <p>Total gasto</p>
+                <strong id="walletSpent">R$ 0,00</strong>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <h3>Histórico financeiro</h3>
+              </div>
+              <div id="walletHistoryList" class="transaction-list"></div>
+            </div>
+          </section>
+
+          <section id="addCreditPage" class="page">
+            <div class="page-header">
+              <div>
+                <span class="eyebrow">CRÉDITOS</span>
+                <h2>Adicionar crédito</h2>
+              </div>
+            </div>
+
+            <div class="panel credit-panel">
+              <div class="amount-grid" id="amountGrid">
+                <button type="button" class="amount-button" data-value="5">R$ 5,00</button>
+                <button type="button" class="amount-button" data-value="10">R$ 10,00</button>
+                <button type="button" class="amount-button" data-value="20">R$ 20,00</button>
+                <button type="button" class="amount-button" data-value="50">R$ 50,00</button>
+                <button type="button" class="amount-button" data-value="100">R$ 100,00</button>
+              </div>
+
+              <form id="addCreditForm" class="credit-form">
+                <label>
+                  Outro valor
+                  <input type="number" id="customCreditValue" min="1" step="0.01" placeholder="Digite um valor" />
+                </label>
+
+                <label>
+                  Forma de pagamento
+                  <select id="paymentMethod">
+                    <option value="Pix">Pix</option>
+                    <option value="Cartão">Cartão</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                  </select>
+                </label>
+
+                <button type="submit" class="primary-button wide-button">Confirmar crédito</button>
+              </form>
+            </div>
+          </section>
+
+          <section id="productsPage" class="page">
+            <div class="page-header">
+              <div>
+                <span class="eyebrow">PRODUTOS</span>
+                <h2>Produtos da cantina</h2>
+              </div>
+            </div>
+
+            <div class="toolbar">
+              <input type="search" id="productSearch" placeholder="Buscar por nome" />
+              <div class="chip-group" id="categoryFilters"></div>
+            </div>
+
+            <div id="productsGrid" class="products-grid"></div>
+          </section>
+
+          <section id="cartPage" class="page">
+            <div class="page-header">
+              <div>
+                <span class="eyebrow">CARRINHO</span>
+                <h2>Meu carrinho</h2>
+              </div>
+            </div>
+
+            <div class="panel cart-panel">
+              <div id="cartItemsList" class="cart-list"></div>
+
+              <div class="cart-summary">
+                <div class="summary-row">
+                  <span>Saldo disponível</span>
+                  <strong id="cartUserBalance">R$ 0,00</strong>
+                </div>
+                <div class="summary-row total-row">
+                  <span>Total da compra</span>
+                  <strong id="cartTotalValue">R$ 0,00</strong>
+                </div>
+                <button type="button" class="primary-button wide-button" id="goToCheckout">Finalizar compra</button>
+              </div>
+            </div>
+          </section>
+
+          <section id="checkoutPage" class="page">
+            <div class="page-header">
+              <div>
+                <span class="eyebrow">COMPRA</span>
+                <h2>Resumo da compra</h2>
+              </div>
+            </div>
+
+            <div class="panel checkout-panel">
+              <div id="checkoutItems" class="checkout-items"></div>
+              <div class="checkout-footer">
+                <div class="summary-row">
+                  <span>Saldo antes</span>
+                  <strong id="checkoutBefore">R$ 0,00</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Total</span>
+                  <strong id="checkoutTotal">R$ 0,00</strong>
+                </div>
+                <div class="summary-row total-row">
+                  <span>Saldo depois</span>
+                  <strong id="checkoutAfter">R$ 0,00</strong>
+                </div>
+                <button type="button" class="primary-button wide-button" id="confirmPurchaseButton">Confirmar compra</button>
+              </div>
+            </div>
+          </section>
+
+          <section id="historyPage" class="page">
+            <div class="page-header">
+              <div>
+                <span class="eyebrow">HISTÓRICO</span>
+                <h2>Meu histórico</h2>
+              </div>
+            </div>
+
+            <div id="historyList" class="history-list"></div>
+          </section>
+
+          <section id="gastosPage" class="page">
+            <div class="page-header">
+              <div>
+                <span class="eyebrow">GASTOS</span>
+                <h2>Meus gastos</h2>
+              </div>
+            </div>
+
+            <div class="two-column">
+              <div class="panel stat-panel">
+                <p>Total gasto no mês</p>
+                <strong id="monthlySpent">R$ 0,00</strong>
+              </div>
+              <div class="panel stat-panel">
+                <p>Total gasto na semana</p>
+                <strong id="weeklySpent">R$ 0,00</strong>
+              </div>
+            </div>
+
+            <div class="two-column small-gap">
+              <div class="panel stat-panel">
+                <p>Quantidade de compras</p>
+                <strong id="purchaseCount">0</strong>
+              </div>
+              <div class="panel stat-panel">
+                <p>Produto mais comprado</p>
+                <strong id="favoriteProduct">—</strong>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <h3>Gastos da semana</h3>
+              </div>
+              <div id="gastosChart" class="chart-bars"></div>
+            </div>
+          </section>
+
+          <section id="profilePage" class="page">
+            <div class="page-header">
+              <div>
+                <span class="eyebrow">PERFIL</span>
+                <h2>Meu perfil</h2>
+              </div>
+            </div>
+
+            <div class="panel profile-panel">
+              <div class="profile-header">
+                <div class="avatar">👤</div>
+                <div>
+                  <h3 id="profileName">Aluno</h3>
+                  <p id="profileRegister">Matrícula</p>
+                </div>
+              </div>
+
+              <div class="profile-info-grid">
+                <div><span>E-mail</span><strong id="profileEmail">—</strong></div>
+                <div><span>CPF</span><strong id="profileCpf">—</strong></div>
+                <div><span>Data de criação</span><strong id="profileCreated">—</strong></div>
+              </div>
+            </div>
+
+            <div class="panel profile-action-panel">
+              <div>
+                <h3>Segurança da conta</h3>
+                <p>Atualize sua senha sempre que precisar.</p>
+              </div>
+              <button type="button" class="primary-button" data-page="changePasswordPage">Alterar senha</button>
+            </div>
+          </section>
+
+          <section id="changePasswordPage" class="page">
+            <div class="page-header">
+              <div>
+                <span class="eyebrow">SEGURANÇA</span>
+                <h2>Alterar senha</h2>
+              </div>
+            </div>
+
+            <div class="panel password-panel">
+              <div id="identityStep">
+                <h3>Confirme pelo seu e-mail</h3>
+                <p class="form-message">Enviamos um código de confirmação para <strong id="passwordEmail">seu e-mail cadastrado</strong>. Digite o número recebido para confirmar que é você.</p>
+                <div class="email-code-preview">
+                  <span>Simulação do e-mail</span>
+                  <strong id="emailCodePreview">------</strong>
+                </div>
+                <form id="confirmIdentityForm" class="auth-form compact-form">
+                  <label>
+                    Código de confirmação
+                    <input type="text" id="identityCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="Digite os 6 números" required />
+                  </label>
+                  <button type="submit" class="primary-button wide-button">Confirmar código</button>
+                  <button type="button" class="text-button" id="resendIdentityCode">Enviar novo código</button>
+                </form>
+              </div>
+
+              <div id="newPasswordStep" hidden>
+                <h3>Crie uma nova senha</h3>
+                <p class="form-message">Identidade confirmada. Agora você pode cadastrar uma nova senha.</p>
+                <form id="changePasswordForm" class="auth-form compact-form">
+                  <label>
+                    Nova senha
+                    <input type="password" id="newPassword" required />
+                  </label>
+                  <label>
+                    Confirmar nova senha
+                    <input type="password" id="confirmNewPassword" required />
+                  </label>
+                  <button type="submit" class="primary-button wide-button">Salvar nova senha</button>
+                </form>
+              </div>
+
+              <button type="button" class="text-button" data-page="profilePage">Voltar para meu perfil</button>
+            </div>
+          </section>
+
+          <section id="totemPage" class="page">
+            <div class="page-header">
+              <div>
+                <span class="eyebrow">TOTEM</span>
+                <h2>Totem da cantina</h2>
+              </div>
+            </div>
+
+            <div class="panel totem-panel">
+              <label>
+                Identifique-se pela matrícula
+                <select id="totemStudentSelect"></select>
+              </label>
+
+              <div class="totem-balance">
+                <span>Saldo atual</span>
+                <strong id="totemBalance">R$ 0,00</strong>
+              </div>
+
+              <div id="totemProducts" class="totem-grid"></div>
+            </div>
+          </section>
+
+          <section id="drinkPage" class="page">
+            <div class="page-header">
+              <div>
+                <span class="eyebrow">MÁQUINA</span>
+                <h2>Máquina de bebidas</h2>
+              </div>
+            </div>
+
+            <div id="drinkMachineList" class="drink-grid"></div>
+          </section>
+        </main>
+
+        <nav class="mobile-nav" aria-label="Navegação mobile">
+          <button type="button" class="mobile-nav-button active" data-page="homePage">🏠</button>
+          <button type="button" class="mobile-nav-button" data-page="productsPage">🛒</button>
+          <button type="button" class="mobile-nav-button" data-page="cartPage">🧺</button>
+          <button type="button" class="mobile-nav-button" data-page="walletPage">💰</button>
+          <button type="button" class="mobile-nav-button" data-page="historyPage">📜</button>
+          <button type="button" class="mobile-nav-button" data-page="profilePage">👤</button>
+        </nav>
+      </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
